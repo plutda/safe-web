@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./index.css">
+  <title>demo</title>
+</head>
+<body>
+  <div class="app">
+    <h1>web safe test</h1>
+    <div class="card">
+      <p>例子1:黑客在网站的评论区评论了一段脚本,服务端直接这段脚本当作评论内容返回给了用户,这时候其他用户在查看评论的时候就会执行这段脚本!</p>
+      <button type="button" onclick="handleTest1()">测试</button>
+    </div>
+
+    <div class="card">
+      <p>例子2:使用正则替换并不靠谱!</p>
+      <input id="test2" type="name" value="<scscriptript>alert(1)</scripscriptt>">
+      <button type="button" onclick="handleTest2()">测试</button>
+    </div>
+  </div>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  const base = 'http://localhost:4000'
+  function handleTest1() {
+    axios({
+      baseURL: base,
+      url: '/inner-script'
+    }).then(res => {
+      const result = res.data
+      document.write(result)
+    })
+  }
+
+  function handleTest2() {
+    const dom = document.querySelector('#test2')
+    axios({
+      baseURL: base,
+      url: '/reg-replace',
+      method: 'POST',
+      data: {
+        value: dom.value
+      }
+    }).then(res => {
+      const result = res.data
+      console.log(result)
+    })
+  }
+</script>
+</html>
