@@ -14,6 +14,9 @@ dependencies:
   koa-body:
     specifier: ^6.0.1
     version: 6.0.1
+  koa-bodyparser:
+    specifier: ^4.4.1
+    version: 4.4.1
   koa-router:
     specifier: ^12.0.1
     version: 12.0.1
@@ -487,6 +490,10 @@ packages:
       keygrip: 1.1.0
     dev: false
 
+  /copy-to@2.0.1:
+    resolution: {integrity: sha512-3DdaFaU/Zf1AnpLiFDeNCD4TOWe3Zl2RZaTzUvWiIk5ERzcCodOE20Vqq4fzCbNoHURFHT4/us/Lfq+S2zyY4w==}
+    dev: false
+
   /debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
     peerDependencies:
@@ -836,6 +843,15 @@ packages:
       co-body: 6.1.0
       formidable: 2.1.2
       zod: 3.22.4
+    dev: false
+
+  /koa-bodyparser@4.4.1:
+    resolution: {integrity: sha512-kBH3IYPMb+iAXnrxIhXnW+gXV8OTzCu8VPDqvcDHW9SQrbkHmqPQtiZwrltNmSq6/lpipHnT7k7PsjlVD7kK0w==}
+    engines: {node: '>=8.0.0'}
+    dependencies:
+      co-body: 6.1.0
+      copy-to: 2.0.1
+      type-is: 1.6.18
     dev: false
 
   /koa-compose@4.1.0:

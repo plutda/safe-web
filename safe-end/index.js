@@ -3,10 +3,12 @@ const router = require("./router")
 const serve = require("koa-static")
 const views = require("koa-views")
 const cors = require('@koa/cors')
+const bodyParser = require('koa-bodyparser')
 
 const app = new Koa()
 
 app.use(cors())
+app.use(bodyParser())
 app.use(serve(__dirname+"/static"))
 app.use(views(__dirname+"/views",{
     extension: "pug"

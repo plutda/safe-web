@@ -17,9 +17,14 @@ router.get("/inner-script",(ctx)=>{
 })
 
 router.post("/reg-replace", (ctx) => {
-  console.log(111, ctx.req.body)
-  // input = input.replace(/script/ig, '')
-  // ctx.body = '<h1>' + input + '</h1>'
+  const body = ctx.request.body
+  const input = body.value.replace(/script/ig, '')
+  ctx.body = '<h1>' + input + '</h1>'
+})
+
+router.get("/transfer_cookie", (ctx) => {
+  const params = ctx.request.query
+  console.log('cookie:', params)
 })
 
 module.exports = router
