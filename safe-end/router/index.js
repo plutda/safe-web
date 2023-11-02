@@ -27,4 +27,34 @@ router.get("/transfer_cookie", (ctx) => {
   console.log('cookie:', params)
 })
 
+
+router.get("/login", async(ctx, next) => {
+  ctx.session.login = true
+  console.log('登陆成功,已添加session!')
+  ctx.body = {
+    message: '登陆成功'
+  }
+  next()
+})
+
+router.get("/logout", async (ctx, next) => {
+  ctx.session.login = false
+  ctx.body = {
+    message: '退出成功'
+  }
+  next()
+})
+
+router.get("/pay", (ctx) => {
+  if (ctx.session.login) {
+    ctx.body = {
+      message: '支付成功'
+    }
+  } else {
+    ctx.body = {
+      message: '未登陆!'
+    }
+  }
+})
+
 module.exports = router

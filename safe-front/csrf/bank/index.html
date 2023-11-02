@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bank</title>
+</head>
+<body>
+  <p>my bank</p>
+  <button onclick="login()">登陆</button>
+  <button onclick="logout()">退出</button>
+  <button onclick="pay()">转账</button>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+  const base = 'http://localhost:4000'
+  function login() {
+    axios({
+      withCredentials: true,
+      baseURL: base,
+      url: '/login'
+    }).then(res => {
+      alert(res.data && res.data.message)
+    })
+  }
+  function logout() {
+    axios({
+      withCredentials: true,
+      baseURL: base,
+      url: '/logout'
+    }).then(res => {
+      alert(res.data && res.data.message)
+    })
+  }
+  function pay() {
+    axios({
+      withCredentials: true,
+      baseURL: base,
+      url: '/pay'
+    }).then(res => {
+      alert(res.data && res.data.message)
+    })
+  }
+</script>
+</html>

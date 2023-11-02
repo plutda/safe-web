@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "start": "node ./bank/index.js & node ./hack/index.js"
+  }
+}

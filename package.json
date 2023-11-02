@@ -1,0 +1,26 @@
+{
+  "name": "xss-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:csrf": "pnpm -r --filter ./safe-front/csrf run start",
+    "start:xss": "pnpm -r --filter ./safe-front/xss run start",
+    "start:end": "pnpm -r --filter ./safe-end run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^4.0.0",
+    "koa": "^2.14.2",
+    "koa-body": "^6.0.1",
+    "koa-bodyparser": "^4.4.1",
+    "koa-router": "^12.0.1",
+    "koa-session": "^6.4.0",
+    "koa-static": "^5.0.0",
+    "koa-static-router": "^1.5.0",
+    "koa-views": "^8.1.0",
+    "pug": "^3.0.2"
+  }
+}

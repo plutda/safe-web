@@ -1,0 +1,3 @@
+packages:
+  - "safe-end"
+  - "safe-front/**"
