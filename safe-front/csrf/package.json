@@ -1,5 +1,7 @@
 {
   "scripts": {
-    "start": "node ./bank/index.js & node ./hack/index.js"
+    "start:bank": "node ./bank/index.js",
+    "start:hack": "node ./hack/index.js",
+    "start": "run-p start:bank start:hack"
   }
 }
