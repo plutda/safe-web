@@ -5,7 +5,7 @@
 
 ### 安装依赖
 
-首先确保你已经安装了`pnpm`，[安装指南](https://pnpm.io/zh/installation)
+首先确保你已经安装了`pnpm` -> [安装](https://pnpm.io/zh/installation)
 
 安装项目所需的所有依赖：
 ```

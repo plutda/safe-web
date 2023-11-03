@@ -10,16 +10,19 @@
   <div class="app">
     <h1>web safe test</h1>
     <div class="card">
-      <p>demo1: 黑客在网站的评论区评论了一段脚本,服务端直接这段脚本当作评论内容返回给了用户,这时候其他用户在查看评论的时候就会执行这段脚本!</p>
-      <button type="button" onclick="handleTest1()">测试</button>
+      <p>demo1: 黑客在网站的评论区评论了一段脚本: <code>alert(1)</code> </p>
+      <p>其他用户在查看评论的时候就会执行这段脚本!</p>
+      <button type="button" onclick="handleTest1()">点击展示注入脚本的html</button>
     </div>
+    <hr>
 
     <div class="card">
       <p>demo2: 在后端使用了正则对字符进行替换:<span class="code">xxx.replace(/script/ig, '')</span></p>
       <p>可见使用正则替换字符串并不靠谱!</p>
-      <p><input id="test2" class="test2" type="name" value="<scscriptript>alert(1)</scripscript>"></p>
+      <p><input id="test2" class="test2" type="name" value="<scscriptript>alert(1)</scscriptript>"></p>
       <button type="button" onclick="handleTest2()">测试</button>
     </div>
+    <hr>
 
     <div id="test3" class="card">
       <p>demo3: v-html</p>
@@ -33,6 +36,7 @@
       <button type="button" @click="handleTest3">测试</button>
       <p>测试一下,发现又被攻击了!</p>
     </div>
+    <hr>
 
     <div class="card">
       <p>demo4: 盗取cookie,攻击者在网站注入获取cookie的攻击脚本,如果此脚本被提供给了其他用户,其他用户在访问网站时,cookie会被传送给攻击者!</p>
@@ -57,7 +61,7 @@
     data() {
       return {
         html: "<span>这是包含了script的动态html内容<script>alert(1)<\/script></span>",
-        escapeHtml: "<img src onerror='alert(1)'/>"
+        escapeHtml: "<div style='color:red'>这是包含脚本的动态html</div><img src onerror='alert(1)'/>"
       }
     },
     methods: {
